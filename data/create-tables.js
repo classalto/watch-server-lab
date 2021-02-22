@@ -17,10 +17,15 @@ async function run() {
                     email VARCHAR(256) NOT NULL,
                     hash VARCHAR(512) NOT NULL
                 );           
-                CREATE TABLE animals (
+                CREATE TABLE watches (
                     id SERIAL PRIMARY KEY NOT NULL,
+                    brand VARCHAR(512) NOT NULL,
                     name VARCHAR(512) NOT NULL,
-                    cool_factor INTEGER NOT NULL,
+                    limited BOOLEAN NOT NULL,
+                    diameter_mm INTEGER NOT NULL,
+                    price INTEGER NOT NULL,
+                    image VARCHAR(512) NOT NULL,
+                    description VARCHAR(512) NOT NULL,
                     owner_id INTEGER NOT NULL REFERENCES users(id)
             );
         `);
