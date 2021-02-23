@@ -175,6 +175,109 @@ describe('app routes', () => {
         .expect(200);
       
       expect(data.body).toEqual(expectation);
+
+    
+    });
+
+    test('should delete row from watches', async() => {
+      
+      const expectation =
+        {
+          'id': 1,
+          'brand': 'omega',
+          'name': 'speedmaster professional plexi',
+          'limited': false,
+          'diameter_mm': 42,
+          'price': 3200,
+          'image': 'https://cdn.watchbase.com/watch/lg/origin:png/omega/speedmaster/3570-50-00-18.webp',
+          'description': 'The Omega Seamaster Bullhead was introduced in 1969. It is powered by the hand-wound caliber 930, which is turned 90 degrees counter clockwise in order to get to the bullhead look. It features an internal rotating bezel. The case measures 41.5 * 42 mm and is made of stainless steel. Together with the Flightmaster, it is one of the most notable examples of Omega\'s late sixties creativity in design.',
+          'owner_id': 1
+        };
+      
+      const data = await fakeRequest(app)
+        .delete('/watches/1')
+        .expect('Content-Type', /json/)
+        .expect(200);
+      
+      expect(data.body).toEqual(expectation);
+      
+      const nothing = await fakeRequest(app)
+        .get('/watches/1')
+        .expect('Content-Type', /json/)
+        .expect(200);
+      
+      expect(nothing.body).toEqual('');
+    });
+
+    test('should update column data for existing row', async() => {
+
+      const newWatch = {
+        'brand': 'new brand',
+        'name': 'updated watch',
+        'limited': true,
+        'diameter_mm': 70,
+        'price': 30,
+        'image': 'no image',
+        'description': 'updated watch just arrived'
+      };
+      
+      const expectation =
+        {
+          ...newWatch,
+          'id': 8,
+          'owner_id': 1
+        };
+      
+      const updatedWatch = await fakeRequest(app)
+        .put('/watches/8')
+        .send(newWatch)
+        .expect('Content-Type', /json/)
+        .expect(200);
+      expect(updatedWatch.body).toEqual(expectation);
+      
+      const updated = await fakeRequest(app)
+        .get('/watches/8')
+        .expect('Content-Type', /json/)
+        .expect(200);
+      
+      expect(updated.body).toEqual(expectation);
+    });
+
+    test('should create new row in table', async() => {
+
+      const newWatch = {
+        'brand': 'new brand',
+        'name': 'cruddy watch',
+        'limited': true,
+        'diameter_mm': 100,
+        'price': 1000,
+        'image': 'https://cdn.watchbase.com/watch/lg/origin:png/omega/speedmaster/3570-50-00-18.webp',
+        'description': 'A brand new cruddy crud watch for cruddy programmers working at a cruddy tech startup.',
+      };
+      
+      const expectation =
+        {
+          ... newWatch,
+          'id': 11,
+          'owner_id': 1
+        };
+      
+      const data = await fakeRequest(app)
+        .post('/watches')
+        .send(newWatch)
+        .expect('Content-Type', /json/)
+        .expect(200);
+      
+      expect(data.body).toEqual(expectation);
+      
+      const allWatches = await fakeRequest(app)
+        .get('/watches')
+        .expect('Content-Type', /json/)
+        .expect(200);
+
+      const findPosted = allWatches.body.find((watch) => watch.name === 'cruddy watch');
+      
+      expect(findPosted).toEqual(expectation);
     });
   });
 });
