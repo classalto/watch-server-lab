@@ -16,10 +16,15 @@ async function run() {
                     id SERIAL PRIMARY KEY,
                     email VARCHAR(256) NOT NULL,
                     hash VARCHAR(512) NOT NULL
+                );
+                CREATE TABLE brands (
+                  id SERIAL PRIMARY KEY NOT NULL,
+                  brand_name VARCHAR(512) NOT NULL,
+                  owner_id INTEGER NOT NULL REFERENCES users(id)
                 );           
                 CREATE TABLE watches (
                     id SERIAL PRIMARY KEY NOT NULL,
-                    brand VARCHAR(512) NOT NULL,
+                    brand_id INTEGER NOT NULL REFERENCES brands(id),
                     name VARCHAR(512) NOT NULL,
                     limited BOOLEAN NOT NULL,
                     diameter_mm INTEGER NOT NULL,
