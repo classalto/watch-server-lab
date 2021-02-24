@@ -28,10 +28,10 @@ async function run() {
     await Promise.all(
       brands.map(category => {
         return client.query(`
-                    INSERT INTO brands (brand_name, owner_id)
-                    VALUES ($1, $2);
+                    INSERT INTO brands (brand_name)
+                    VALUES ($1);
                 `,
-        [category.brand_name, user.id]);
+        [category.brand_name]);
       })
     );
     

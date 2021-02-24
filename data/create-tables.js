@@ -19,8 +19,7 @@ async function run() {
                 );
                 CREATE TABLE brands (
                   id SERIAL PRIMARY KEY NOT NULL,
-                  brand_name VARCHAR(512) NOT NULL,
-                  owner_id INTEGER NOT NULL REFERENCES users(id)
+                  brand_name VARCHAR(512) NOT NULL
                 );           
                 CREATE TABLE watches (
                     id SERIAL PRIMARY KEY NOT NULL,
