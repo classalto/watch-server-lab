@@ -3,7 +3,7 @@
 module.exports = [
   {
     'id': 1,
-    'brand': 'omega',
+    'brand_id': 1,
     'name': 'speedmaster professional plexi',
     'limited': false,
     'diameter_mm': 42,
@@ -13,7 +13,7 @@ module.exports = [
   },
   {
     'id': 2,
-    'brand': 'omega',
+    'brand_id': 1,
     'name': 'seamaster planet ocean 600m',
     'limited': false,
     'diameter_mm': 45,
@@ -23,7 +23,7 @@ module.exports = [
   },
   {
     'id': 3,
-    'brand': 'omega',
+    'brand_id': 1,
     'name': 'seamaster bullhead 930',
     'limited': false,
     'diameter_mm': 27,
@@ -33,7 +33,7 @@ module.exports = [
   },
   {
     'id': 4,
-    'brand': 'seiko',
+    'brand_id': 2,
     'name': 'mechanical alpinist stainless steel',
     'limited': false,
     'diameter_mm': 39,
@@ -43,7 +43,7 @@ module.exports = [
   },
   {
     'id': 5,
-    'brand': 'seiko',
+    'brand_id': 2,
     'name': 'prospex diver ssc489P1 ',
     'limited': false,
     'diameter_mm': 44,
@@ -53,7 +53,7 @@ module.exports = [
   },
   {
     'id': 6,
-    'brand': 'seiko',
+    'brand_id': 2,
     'name': 'recraft cushion stainless steel',
     'limited': false,
     'diameter_mm': 43,
@@ -63,7 +63,7 @@ module.exports = [
   },
   {
     'id': 7,
-    'brand': 'breitling',
+    'brand_id': 3,
     'name': 'galactic 36 automatic stainless steel',
     'limited': false,
     'diameter_mm': 36,
@@ -73,7 +73,7 @@ module.exports = [
   },
   {
     'id': 8,
-    'brand': 'tagheuer',
+    'brand_id': 4,
     'name': 'link caliber 6',
     'limited': true,
     'diameter_mm': 39,
@@ -83,7 +83,7 @@ module.exports = [
   },
   {
     'id': 9,
-    'brand': 'certina',
+    'brand_id': 5,
     'name': 'ds rookie chronograph',
     'limited': true,
     'diameter_mm': 40,
@@ -93,7 +93,7 @@ module.exports = [
   },
   {
     'id': 10,
-    'brand': 'certina',
+    'brand_id': 5,
     'name': 'ds super ph500m stainless steel',
     'limited': false,
     'diameter_mm': 43,
