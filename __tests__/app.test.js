@@ -152,7 +152,7 @@ describe('app routes', () => {
       expect(data.body).toEqual(expect.arrayContaining(expectation));
     });
     
-    test.only('returns watch', async() => {
+    test('returns watch', async() => {
       
       const expectation =
       {
@@ -164,6 +164,8 @@ describe('app routes', () => {
         'price': 9000,
         'image': 'https://cdn.watchbase.com/watch/lg/origin:jpg/omega/seamaster-bullhead/st-146-011-f.webp',
         'description': 'The Omega Seamaster Bullhead was introduced in 1969. Together with the Flightmaster, it is one of the most notable examples of Omega\'s late sixties creativity in design.',
+        'owner_id': 1,
+        'brand_name': 'omega'
       };
       
       const data = await fakeRequest(app)
@@ -181,7 +183,7 @@ describe('app routes', () => {
       const expectation =
         {
           'id': 1,
-          'brand': 'omega',
+          'brand_id': 1,
           'name': 'speedmaster professional plexi',
           'limited': false,
           'diameter_mm': 42,
@@ -209,7 +211,7 @@ describe('app routes', () => {
     test('should update column data for existing row', async() => {
 
       const newWatch = {
-        'brand': 'new brand',
+        'brand_id': 5,
         'name': 'updated watch',
         'limited': true,
         'diameter_mm': 70,
@@ -220,17 +222,24 @@ describe('app routes', () => {
       
       const expectation =
         {
-          ...newWatch,
+          'brand_id': 5,
+          'brand_name': 'certina',
+          'name': 'updated watch',
+          'limited': true,
+          'diameter_mm': 70,
+          'price': 30,
+          'image': 'no image',
+          'description': 'updated watch just arrived',
           'id': 8,
           'owner_id': 1
         };
       
-      const updatedWatch = await fakeRequest(app)
+      await fakeRequest(app)
         .put('/watches/8')
         .send(newWatch)
         .expect('Content-Type', /json/)
         .expect(200);
-      expect(updatedWatch.body).toEqual(expectation);
+      
       
       const updated = await fakeRequest(app)
         .get('/watches/8')
@@ -243,7 +252,7 @@ describe('app routes', () => {
     test('should create new row in table', async() => {
 
       const newWatch = {
-        'brand': 'new brand',
+        'brand_id': 2,
         'name': 'cruddy watch',
         'limited': true,
         'diameter_mm': 100,
@@ -256,16 +265,17 @@ describe('app routes', () => {
         {
           ... newWatch,
           'id': 11,
-          'owner_id': 1
+          'owner_id': 1,
+          'brand_name': 'seiko'
         };
       
-      const data = await fakeRequest(app)
+      await fakeRequest(app)
         .post('/watches')
         .send(newWatch)
         .expect('Content-Type', /json/)
         .expect(200);
       
-      expect(data.body).toEqual(expectation);
+      
       
       const allWatches = await fakeRequest(app)
         .get('/watches')
